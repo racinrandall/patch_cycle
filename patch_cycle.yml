@@ -1,0 +1,6 @@
+---
+- name: Patch Cycle
+  hosts: all
+  serial: 1
+  roles:
+    - patch_cycle
