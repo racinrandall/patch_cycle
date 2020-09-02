@@ -1,0 +1,11 @@
+---
+- name: Patch All hosts other than Satellite
+  yum:
+    name: *
+    state: latest
+  register: yum_updates
+  when: "'sat' not in group_names"
+
+- name: reboot if kernel updated
+  reboot:
+  when: yum_updates.changes.updated|flatten|select('regex', '^kernel$') is any
